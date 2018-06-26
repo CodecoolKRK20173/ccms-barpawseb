@@ -7,7 +7,7 @@ public abstract class User{
     protected String password;
     static String defaultPassword = "user";
     static int nextId = 1;
-    protected String id;
+    protected int id;
 
     public User (String name){
         this.name = name;
