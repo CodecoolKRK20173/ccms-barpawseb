@@ -1,5 +1,6 @@
 src/users/Employee.java
 src/users/User.java
 src/users/Mentor.java
+src/users/Menager.java
 src/users/Student.java
 src/things/Assigment.java
