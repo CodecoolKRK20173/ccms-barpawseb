@@ -32,8 +32,17 @@ public abstract class User{
     private void setPassword (Scanner in){
         password = in.nextLine();
     }
-        
 
+    public int getId(){
+        return id;
+    }
 
+    public boolean equals(Object obj){
+        if (obj == null) return false;
+        if (obj == this) return true;
+        if (!(obj instanceof User)) return false;
+        User o = (User) obj;
+        return o.getId() == this.getId();
+    }
 
 }
