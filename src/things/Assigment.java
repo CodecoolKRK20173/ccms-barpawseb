@@ -13,5 +13,3 @@ public class Assigment{
 		this.maxPoints = maxPoints;
 	}
 }
-	
-

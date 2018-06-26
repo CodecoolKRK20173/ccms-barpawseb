@@ -3,7 +3,6 @@ package users;
 import java.util.Scanner;
 
 public abstract class User{
-    
     protected String name;
     protected String password;
     static String defaultPassword = "user";
