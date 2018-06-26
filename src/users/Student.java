@@ -1,10 +1,10 @@
+package users;
+
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
 
 import things.*;
-
-package users;
 
 public class Student extends User{
     protected float grades;
