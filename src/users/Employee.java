@@ -10,7 +10,7 @@ public class Employee extends User{
         super(name);   
     }
 
-    protected Employee (String name, String password, String id, List<Student> allStudents){
+    protected Employee (String name, String password, int id, List<Student> allStudents){
         super(name, password, id);
         this.allStudents = allStudents;
     }
