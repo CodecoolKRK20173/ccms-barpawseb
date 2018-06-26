@@ -14,8 +14,14 @@ public abstract class User{
     public User (String name){
         this.name = name;
         this.password = defaultPassword + name;
-
         setID();
+    }
+
+    public User (String name, String password, String id){
+        this.name = name;
+        this.password = password;
+        this.id = id;
+        nextId = id;
     }
 
     public void setID(){

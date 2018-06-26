@@ -1,10 +1,9 @@
-import java.util.ArrayDeque;
+package users;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import things.*;
-
-package users;
 
 public class Student extends User{
     protected float grades;
@@ -12,7 +11,12 @@ public class Student extends User{
 
     protected Student(String name){
         super(name);
-        myAssigments = new ArrayList<>();
+        myAssigments = new ArrayList<>(); //as far ArrayList, later maybe set, 
+    }
+
+    protected Student(String name, String password, String id, List<Assigment> myAssigments){
+        super(name, password, id);
+        this.myAssigments = myAssigments;
     }
 
     private void addToMyAssigments(Assigment assigment){
