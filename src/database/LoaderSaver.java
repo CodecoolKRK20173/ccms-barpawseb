@@ -17,8 +17,15 @@ public class LoaderSaver {
     }
 
     public void displayAllUsers() {
-        for (int i = 0; i < users.size(); i++) {
-            System.out.println(users.get(i));
+        for (String user : users) {
+            System.out.println(user);
         }
+    }
+
+    public String[] userInfo(String singleUser) {
+        String[] parts = singleUser.split(",");
+        System.out.println(parts[0]);
+        System.out.println(parts[1]);
+        return parts;
     }
 }
