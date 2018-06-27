@@ -2,12 +2,12 @@ package things;
 
 import java.time.LocalDate;
 
-public class Assigment{
+public class Assignment {
 	String title;
 	double maxPoints;
 	LocalDate deadline;
 
-	public Assigment(String title, double maxPoints){
+	public Assignment(String title, LocalDate deadline, int maxPoints){
 		this.title = title;
 		this.maxPoints = maxPoints;
 		LocalDate today = LocalDate.now();
