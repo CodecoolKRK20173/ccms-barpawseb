@@ -1,22 +1,21 @@
 package users;
-import java.util.List;
-import java.util.ArrayList;
+
  public class Mentor extends Employee{
 
-    protected Mentor(String name){
-        super(name);
-        
+    public Mentor(String name, String email){
+        super(name, email);
     }
 
-    protected Mentor(String name, String password, int id, ArrayList<Student> allStudents){
-        super(name, password, id, allStudents);
+    public Mentor(String name, String email, String password, double salary){
+        super(name, email, password, salary);
     }
-
+/*
     public void addStudent(String name){
         allStudents.add(new Student(name));
     }
 
-    public void removeStudent(int id){
-        allStudents.removeIf(s -> s.getId() == id);
-    }
+    public void removeStudent(String email ){
+        allStudents.removeIf(s -> s.getEmail() == email);
+    }*/
+
  }

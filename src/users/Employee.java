@@ -6,12 +6,12 @@ import java.util.List;
 public class Employee extends User{
     double salary;
 
-    protected Employee(String name, String email){
+    public Employee(String name, String email){
         super(name, email);
         salary = 500;
     }
 
-    protected Employee (String name, String email, String password, double salary){
+    public Employee (String name, String email, String password, double salary){
         super(name, password, email);
         this.salary = salary;
     }

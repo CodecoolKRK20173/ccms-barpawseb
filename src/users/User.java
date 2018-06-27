@@ -4,10 +4,10 @@ import java.util.Scanner;
 
 public abstract class User{
     
-    protected String name;
-    protected String password;
+    private String name;
+    private String password;
     static String defaultPassword = "user";
-    protected String email; 
+    private String email; 
     
 
     public User (String name, String email){
