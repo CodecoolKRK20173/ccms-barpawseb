@@ -1,11 +1,10 @@
 import database.DataManager;
 import java.io.IOException;
 import java.util.Scanner;
-import java.util.Iterator;
 
 class loginHandler {
     private DataManager dataManager;
-    private static String[] userDetails;
+    private static String[] loggingInUserDetails;
 
     loginHandler() throws IOException {
         dataManager = new DataManager();
@@ -15,15 +14,13 @@ class loginHandler {
     private static String getEmailFromUser() {
         Scanner scan = new Scanner (System.in);
         System.out.print("Please provide e-mail: ");
-        String emailFromUser = scan.nextLine();
-        return emailFromUser;
+        return scan.nextLine();
     }
 
     private static String getPasswordFromUser() {
         Scanner scan = new Scanner (System.in);
         System.out.print("Please provide password: ");
-        String passFromUser = scan.nextLine();
-        return passFromUser;
+        return scan.nextLine();
     }
 
     private boolean isLoggedIn() {
@@ -37,11 +34,10 @@ class loginHandler {
     }
 
     private boolean isUserInDatabase(String email) {
-        Iterator<String[]> usersIterator = dataManager.iterator();
-        while (usersIterator.hasNext()) {
-            userDetails = usersIterator.next();
-            String emailFromDatabase = userDetails[0];
+        for (String[] user : dataManager) {
+            String emailFromDatabase = user[0];
             if (emailFromDatabase.equals(email)) {
+                loggingInUserDetails = user;
                 return true;
             }
         }
@@ -50,7 +46,7 @@ class loginHandler {
     }
 
     private boolean isPasswordCorrect(String passFromUser) {
-        String passFromDatabase = userDetails[3];
+        String passFromDatabase = loggingInUserDetails[3];
         if ((passFromUser.equals(passFromDatabase))) return true;
         else {
             System.out.println("Wrong password.");
