@@ -10,11 +10,11 @@ import users.Student;
 
 public class DataReglamentator{
     Iterable<String[]> dataMenager;
-    Collection<User> allUsers;
+    //Collection<User> allUsers;
 
     public DataReglamentator() throws IOException{
         dataMenager = new DataManager();
-        allUsers = new ArrayList<>();
+        //List<User> allUsers = new ArrayList<>();
     }
 
     public List<Student> getStudentsList(){
@@ -35,9 +35,9 @@ public class DataReglamentator{
         return emoloyees;
     }
 
-    public void updateDataMenager(List<User> allUsers){
-        for
-    }
+//    public void updateDataMenager(List<User> allUsers){
+//        for
+//    }
 
     public static void main(String[] args)throws IOException {
         DataReglamentator test = new DataReglamentator();

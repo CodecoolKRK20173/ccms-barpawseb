@@ -12,11 +12,8 @@ class CcMS {
 
     CcMS() throws IOException {
         dataManager = new DataManager();
-        usersIterator = dataManager.iterator();
         getLoginData();
         isLoggedIn();
-
-
 //        displayAllUsers();
 //        displayAllStudents();
 //        displayAllMentors();
@@ -33,55 +30,60 @@ class CcMS {
     private boolean isLoggedIn() {
         if (isUserInDatabase(emailFromUser)) {
             if (isPasswordCorrect(passFromUser)) {
-                System.out.println("GOOD! You're in!");
+                System.out.println("Good! Yo're in.");
                 return true;
             }
-            else
-                System.out.println("Wrong password.");
-        }
-        else {
-            System.out.println("No such user. :(");
         }
         return false;
     }
 
     private boolean isUserInDatabase(String email) {
-        while(usersIterator.hasNext()) {
-                userDetails = usersIterator.next();
-                String emailFromDatabase = userDetails[0];
+        usersIterator = dataManager.iterator();
+        while (usersIterator.hasNext()) {
+            userDetails = usersIterator.next();
+            String emailFromDatabase = userDetails[0];
             if (emailFromDatabase.equals(email)) {
                 return true;
             }
-
         }
+        System.out.println("There is no such user. :(");
         return false;
     }
 
-    private boolean isPasswordCorrect(String password) {
-        String passwordFromDatabase = userDetails[3];
-        return (password.equals(passwordFromDatabase));
-    }
-
-
-    public void displayAllUsers() {
-        while(usersIterator.hasNext()) {
-            System.out.println(usersIterator.next());
+    private boolean isPasswordCorrect(String passFromUser) {
+        String passFromDatabase = userDetails[3];
+        if ((passFromUser.equals(passFromDatabase))) return true;
+        else {
+            System.out.println("Wrong password.");
+            return false;
         }
     }
 
-//    public void displayAllStudents() {
-//        for (String user : users) {
-//            String[] parts = user.split(",");
-//            if (parts[4].equals("s"))
-//                System.out.println(user);
-//        }
-//    }
+    public void displayAllUsers() {
+        usersIterator = dataManager.iterator();
+        while(usersIterator.hasNext()) {
+            String[] userInfo = usersIterator.next();
+            System.out.println(userInfo[0] + " " + userInfo[1] + " " + userInfo[2]);
+        }
+    }
 
-//    public void displayAllMentors() {
-//        for (String user : users) {
-//            String[] parts = user.split(",");
-//            if (parts[4].equals("m"))
-//                System.out.println(user);
-//        }
-//    }
+    public void displayAllStudents() {
+        usersIterator = dataManager.iterator();
+        while(usersIterator.hasNext()) {
+            String[] userInfo = usersIterator.next();
+            String userStatus = userInfo[4];
+            if (userStatus.equals("s"))
+                System.out.println(userInfo[0] + " " + userInfo[1] + " " + userInfo[2]);
+        }
+    }
+
+    public void displayAllMentors() {
+        usersIterator = dataManager.iterator();
+        while(usersIterator.hasNext()) {
+            String[] userInfo = usersIterator.next();
+            String userStatus = userInfo[4];
+            if (userStatus.equals("m"))
+                System.out.println(userInfo[0] + " " + userInfo[1] + " " + userInfo[2]);
+        }
+    }
 }
