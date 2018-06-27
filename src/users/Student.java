@@ -39,5 +39,4 @@ public class Student extends User{
     public void incrementAbsence(){
         absence++;
     }
-    
 }

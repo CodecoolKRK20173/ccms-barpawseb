@@ -7,7 +7,7 @@ public abstract class User{
     private String name;
     private String password;
     static String defaultPassword = "user";
-    private String email; 
+    private String email;
     
 
     public User (String name, String email){
@@ -21,7 +21,6 @@ public abstract class User{
         this.password = password;
         this.email = email;
     }
-
 
     protected void setPassword (Scanner in){
         password = in.nextLine();

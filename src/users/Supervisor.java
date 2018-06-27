@@ -3,14 +3,14 @@ package users;
 import java.util.List;
 import java.util.ArrayList;
 
- public class Menager extends User {
+ public class Supervisor extends User {
 
-    public Menager (String name, String email){
+    public Supervisor (String name, String email){
         super(name, email);
     }
     
-    protected Menager(String name, String email, String password){
-        super(name, password, email);
+    protected Supervisor (String name, String email, String password){
+        super(name, email, password);
     }
 
     /*protected void addEmployee(String name){
