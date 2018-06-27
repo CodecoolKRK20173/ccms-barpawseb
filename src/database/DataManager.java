@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class DataManager implements Iterable<String[]> {
-    private List<String[]> users = new ArrayList<>();
+    private List<String[]> usersLines = new ArrayList<>();
 
     public DataManager() throws IOException {
         loadUsersList("src/database/users.csv");
@@ -18,11 +18,15 @@ public class DataManager implements Iterable<String[]> {
         Scanner scan = new Scanner(Paths.get(fileName));
         while (scan.hasNextLine()) {
             String[] userDetails = scan.nextLine().split(",");
-            users.add(userDetails);
+            usersLines.add(userDetails);
         }
     }
 
     public Iterator<String[]> iterator() {
-        return users.iterator();
+        return usersLines.iterator();
+    }
+
+    public setUsersLines(List<String[]> lines){ //overwrites list with content to be written to data base;
+        usersLines = lines;
     }
 }
