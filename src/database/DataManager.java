@@ -7,30 +7,22 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
-public class DataManager implements Iterable<String> {
-    private List<String> users = new ArrayList<>();
+public class DataManager implements Iterable<String[]> {
+    private List<String[]> users = new ArrayList<>();
 
-
-    public List<String> loadUsersList(String fileName) throws IOException {
-        Scanner scan = new Scanner(Paths.get(fileName));
-        while (scan.hasNextLine()) {
-            users.add(scan.nextLine());
-        }
-        return users;
+    public DataManager() throws IOException {
+        loadUsersList("src/database/users.csv");
     }
 
-//    @Override
-//    public boolean hasNext() {
-//        return users.iterator().hasNext();
-//    }
-//
-//    @Override
-//    public String next() {
-//        return users.iterator().next();
-//    }
+    private void loadUsersList(String fileName) throws IOException {
+        Scanner scan = new Scanner(Paths.get(fileName));
+        while (scan.hasNextLine()) {
+            String[] userDetails = scan.nextLine().split(",");
+            users.add(userDetails);
+        }
+    }
 
-    @Override
-    public Iterator<String> iterator() {
+    public Iterator<String[]> iterator() {
         return users.iterator();
     }
 }

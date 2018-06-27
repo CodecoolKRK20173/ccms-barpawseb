@@ -1,59 +1,87 @@
 import database.DataManager;
 import java.io.IOException;
-import java.util.List;
 import java.util.Scanner;
+import java.util.Iterator;
 
 class CcMS {
-    private DataManager users;
+    private DataManager dataManager;
+    private Iterator<String[]> usersIterator;
+    private static String emailFromUser;
+    private static String passFromUser;
+    private static String[] userDetails;
 
     CcMS() throws IOException {
-        users = new DataManager();
-        users.loadUsersList("src/database/users.csv");
+        dataManager = new DataManager();
+        usersIterator = dataManager.iterator();
+        getLoginData();
+        isLoggedIn();
+
 
 //        displayAllUsers();
 //        displayAllStudents();
 //        displayAllMentors();
-        login();
     }
 
-    public static void login() {
+    private static void getLoginData() {
         Scanner scan = new Scanner (System.in);
         System.out.print("Please provide e-mail: ");
-        String email = scan.nextLine();
+        emailFromUser = scan.nextLine();
         System.out.print("Please provide password: ");
-        String passwd = scan.nextLine();
-
+        passFromUser = scan.nextLine();
     }
 
-    public boolean doesUserExist(String email) {
-        for (String user : users){
-            String[] parts = user.split(",");
-            if (parts[0].equals(email))
+    private boolean isLoggedIn() {
+        if (isUserInDatabase(emailFromUser)) {
+            if (isPasswordCorrect(passFromUser)) {
+                System.out.println("GOOD! You're in!");
                 return true;
+            }
+            else
+                System.out.println("Wrong password.");
+        }
+        else {
+            System.out.println("No such user. :(");
         }
         return false;
     }
 
+    private boolean isUserInDatabase(String email) {
+        while(usersIterator.hasNext()) {
+                userDetails = usersIterator.next();
+                String emailFromDatabase = userDetails[0];
+            if (emailFromDatabase.equals(email)) {
+                return true;
+            }
+
+        }
+        return false;
+    }
+
+    private boolean isPasswordCorrect(String password) {
+        String passwordFromDatabase = userDetails[3];
+        return (password.equals(passwordFromDatabase));
+    }
+
 
     public void displayAllUsers() {
-        for (String user : users) {
-            System.out.println(user);
+        while(usersIterator.hasNext()) {
+            System.out.println(usersIterator.next());
         }
     }
 
-    public void displayAllStudents() {
-        for (String user : users) {
-            String[] parts = user.split(",");
-            if (parts[4].equals("s"))
-                System.out.println(user);
-        }
-    }
+//    public void displayAllStudents() {
+//        for (String user : users) {
+//            String[] parts = user.split(",");
+//            if (parts[4].equals("s"))
+//                System.out.println(user);
+//        }
+//    }
 
-    public void displayAllMentors() {
-        for (String user : users) {
-            String[] parts = user.split(",");
-            if (parts[4].equals("m"))
-                System.out.println(user);
-        }
-    }
+//    public void displayAllMentors() {
+//        for (String user : users) {
+//            String[] parts = user.split(",");
+//            if (parts[4].equals("m"))
+//                System.out.println(user);
+//        }
+//    }
 }
