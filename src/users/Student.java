@@ -39,4 +39,9 @@ public class Student extends User{
     public void incrementAbsence(){
         absence++;
     }
+
+    public String toString(){
+        return String.format("\n%s \t\tAbsence: %d",super.toString(), absence);
+
+    }
 }

@@ -22,8 +22,8 @@ public abstract class User{
         this.email = email;
     }
 
-    protected void setPassword (Scanner in){
-        password = in.nextLine();
+    public void setPassword (String newPassword){
+        password = newPassword;
     }
 
     public String getEmail(){
