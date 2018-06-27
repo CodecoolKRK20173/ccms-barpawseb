@@ -1,14 +1,14 @@
+import controllers.StudentController;
 import database.DataManager;
 import java.io.IOException;
 import java.util.Scanner;
 
-class loginHandler {
+class LoginHandler {
     private DataManager dataManager;
-    private static String[] loggingInUserDetails;
+    private String[] loggedInUserDetails;
 
-    loginHandler() throws IOException {
+    LoginHandler() throws IOException {
         dataManager = new DataManager();
-        isLoggedIn();
     }
 
     private static String getEmailFromUser() {
@@ -23,7 +23,7 @@ class loginHandler {
         return scan.nextLine();
     }
 
-    private boolean isLoggedIn() {
+    boolean isLoggedIn() {
         if (isUserInDatabase(getEmailFromUser())) {
             if (isPasswordCorrect(getPasswordFromUser())) {
                 System.out.println("Good! Yo're in.");
@@ -37,7 +37,7 @@ class loginHandler {
         for (String[] user : dataManager) {
             String emailFromDatabase = user[0];
             if (emailFromDatabase.equals(email)) {
-                loggingInUserDetails = user;
+                loggedInUserDetails = user;
                 return true;
             }
         }
@@ -46,11 +46,15 @@ class loginHandler {
     }
 
     private boolean isPasswordCorrect(String passFromUser) {
-        String passFromDatabase = loggingInUserDetails[3];
+        String passFromDatabase = loggedInUserDetails[3];
         if ((passFromUser.equals(passFromDatabase))) return true;
         else {
             System.out.println("Wrong password.");
             return false;
         }
+    }
+
+    public String[] getloggedInUserDetails() {
+        return loggedInUserDetails;
     }
 }
