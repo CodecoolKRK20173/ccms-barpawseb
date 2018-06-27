@@ -37,6 +37,10 @@ public abstract class User{
     public String getPassword(){
         return password;
     }
+
+    public String getStatus(){
+        return getClass().getSimpleName();
+    }
     
     public boolean equals(Object obj){
         if (obj == null) return false;
