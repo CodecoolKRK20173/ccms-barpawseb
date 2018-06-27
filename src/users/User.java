@@ -3,45 +3,51 @@ package users;
 import java.util.Scanner;
 
 public abstract class User{
-    protected String name;
-    protected String password;
+    
+    private String name;
+    private String password;
     static String defaultPassword = "user";
-    static int nextId = 1;
-    protected int id;
+    private String email;
     
 
-    public User (String name){
+    public User (String name, String email){
         this.name = name;
-        this.password = defaultPassword + name;
-        setID();
+        this.password = defaultPassword +""+ name;
+        this.email = email;
     }
 
-    public User (String name, String password, int id){
+    public User (String name, String email, String password){
         this.name = name;
         this.password = password;
-        this.id = id;
-        nextId = id;
+        this.email = email;
     }
 
-    public void setID(){
-        id = nextId;
-        nextId++;
-    }
-
-    private void setPassword (Scanner in){
+    protected void setPassword (Scanner in){
         password = in.nextLine();
     }
 
-    public int getId(){
-        return id;
+    public String getEmail(){
+        return email;
     }
 
+    public String getName(){
+        return this.name;
+    }
+
+    public String getPassword(){
+        return password;
+    }
+    
     public boolean equals(Object obj){
         if (obj == null) return false;
         if (obj == this) return true;
         if (!(obj instanceof User)) return false;
         User o = (User) obj;
-        return o.getId() == this.getId();
+        return o.getEmail().equals(this.getEmail());
+    }
+
+    public String toString(){
+        return String.format("Name: %s\n\t\te-mail: %s\n", name, email);
     }
 
 }
