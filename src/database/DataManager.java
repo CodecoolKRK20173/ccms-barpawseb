@@ -26,7 +26,7 @@ public class DataManager implements Iterable<String[]> {
         return usersLines.iterator();
     }
 
-    public setUsersLines(List<String[]> lines){ //overwrites list with content to be written to data base;
+    public void setUsersLines(List<String[]> lines){ //overwrites list with content to be written to data base;
         usersLines = lines;
     }
 }
