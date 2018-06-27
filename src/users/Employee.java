@@ -25,7 +25,7 @@ public class Employee extends User{
     }
     
     public String toString(){
-        return String.format("%s \t\tSalary: %f",super.toString(), salary);
+        return String.format("\n%s \t\tSalary: %f",super.toString(), salary);
     }
     
 }
