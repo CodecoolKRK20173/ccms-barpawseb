@@ -19,7 +19,7 @@ public class Student extends User{
     }
 
     public Student(String name, String email, String password, int absence){
-        super(name, password, email);
+        super(name, email, password);
         this.gradesSum = grades.values().stream().mapToDouble(Number::doubleValue).sum();
         this.absence = absence;
     }

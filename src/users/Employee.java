@@ -12,7 +12,7 @@ public class Employee extends User{
     }
 
     public Employee (String name, String email, String password, double salary){
-        super(name, password, email);
+        super(name, email, password);
         this.salary = salary;
     }
 
