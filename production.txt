@@ -1,8 +1,7 @@
-src/Main.java
-src/controllers/SupervisorController.java
-src/controllers/StudentController.java
+
+
 src/controllers/MentorController.java
-src/controllers/SimpleEmployeeController.java
+
 src/database/DataManager.java
 src/database/DataReglamentator.java
 src/users/Employee.java
@@ -10,6 +9,7 @@ src/users/User.java
 src/users/Supervisor.java
 src/users/Mentor.java
 src/users/Student.java
+
 src/view/View.java
+
 src/things/Assignment.java
-src/loginHandler.java

@@ -1,6 +1,6 @@
-b.dymet@gmail.com,Bartosz Dymet,kura,s,2,null
-koordynator@zoho.com,Tomasz Mann,kot,e,null,500
-tomek@domek.com,Janek Kall,rakuna,m,null,1000
-janek@koko.com,Janek Kotor,kat,s,3,null
-jozek@lala.com,Józef Karra,laptop,m,null,1000
-jerzy.mardaus@codecool.com,Jarzy Mardaus,boss,b,null,null
+b.dymet@gmail.com,Bartosz Dymet,kura,Student,2,null
+koordynator@zoho.com,Tomasz Mann,kot,Employee,null,500
+tomek@domek.com,Janek Kall,rakuna,Mentor,null,1000
+janek@koko.com,Janek Kotor,kat,Student,3,null
+jozek@lala.com,Józef Karra,laptop,Mentor,null,1000
+jerzy.mardaus@codecool.com,Jarzy Mardaus,boss,Supervisor,null,null
