@@ -41,6 +41,8 @@ public class DataReglamentator{
                 supervisors.add(new Supervisor(name, email, password));
             else if(status.equals("Student"))
                 students.add(new Student(name, email, password, Integer.parseInt(absence)));
+            else if (status.equals("Mentor"))
+                employees.add(new Mentor(name, email, password, Double.parseDouble(salary)));
             else employees.add(new Employee(name, email, password, Double.parseDouble(salary)));
         }
     }
@@ -152,8 +154,8 @@ public class DataReglamentator{
     public void updateDataManager(){
         List <String[]> lines = transformUsersListToExportLines();
         dataManager.setUsersLines(lines);
-        for(String[] line:lines)
-            System.out.println(Arrays.toString(line));
+        //for(String[] line:lines)
+          //  System.out.println(Arrays.toString(line));
     }
 
     private List<String[]> transformUsersListToExportLines(){
@@ -181,14 +183,15 @@ public class DataReglamentator{
         }
         return usersLines;        
     }
-           
-  
 
     public static void main(String[] args)throws IOException {
-        User student = new Student("name", "email");
-        System.out.println(student.getStatus());
+        User mentor = new Mentor ("name", "email");
+        System.out.println(mentor.getStatus());
         DataReglamentator test = new DataReglamentator();
-        test.updateDataManager();
+        User kto = test.getUserByEmail("jozek@lala.com");
+        System.out.println(kto);
+        System.out.println(kto.getStatus());
+        //test.updateDataManager();
        /*
         System.out.println(test.getStudentsList());
         System.out.println(test.getEmployeesList());
@@ -198,7 +201,7 @@ public class DataReglamentator{
         test.addStudent("piotr", "email");
         System.out.println(test.getStudentsList());
         System.out.println(" \n* * * \n");*/
-        System.out.println(test.getUsersList());
+        //System.out.println(test.getUsersList());
     }
 }
 
