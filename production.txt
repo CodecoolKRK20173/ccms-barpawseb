@@ -11,5 +11,5 @@ src/users/Supervisor.java
 src/users/Mentor.java
 src/users/Student.java
 src/view/View.java
-src/things/Assigment.java
+src/things/Assignment.java
 src/loginHandler.java
