@@ -2,51 +2,56 @@ import controllers.MentorController;
 import controllers.SimpleEmployeeController;
 import controllers.StudentController;
 import controllers.SupervisorController;
+import database.DataReglamentator;
+import users.User;
 
 import java.io.IOException;
 
 class Application {
-    private String[] loggedInUserDetails;
+    private User loggedInUser;
+    public DataReglamentator dataReglamentator;
 
-    Application() throws IOException {
-        LoginHandler loginHandler = new LoginHandler();
-        if (loginHandler.isLoggedIn()) {
-            loggedInUserDetails = loginHandler.getloggedInUserDetails();
-            chooseController();
+    Application() {
+        try {
+            dataReglamentator = new DataReglamentator();
+            LoginHandler loginHandler = new LoginHandler(dataReglamentator);
+            if (loginHandler.isLoggedIn()) {
+                loggedInUser = loginHandler.getLoggedInUser();
+                chooseController();
+            }
+        }
+        catch(IOException e){
+            e.printStackTrace();
         }
     }
 
     private void chooseController() {
-        String email = loggedInUserDetails[0];
-        String name = loggedInUserDetails[1];
-        String password = loggedInUserDetails[2];
-        String status = loggedInUserDetails[3];
-        double grade = Double.parseDouble(loggedInUserDetails[4]);
-        double salary = Double.parseDouble(loggedInUserDetails[5]);
+        String email = loggedInUser.getEmail();
+        String status = loggedInUser.getStatus();
 
-        if (status.equals("s"))
-            handleStudentController(email, name, password, grade);
-        else if (status.equals("m"))
-            handleMentorController(email, name, password, salary);
-        else if (status.equals("e"))
-            handleSimpleEmploeeController(email, name, password, salary);
-        else if (status.equals("j"))
-            handleSupervisorController(email, name, password, salary);
+        if (status.equals("Student"))
+            handleStudentController(email);
+        else if (status.equals("Mentor"))
+            handleMentorController(email);
+        else if (status.equals("Employee"))
+            handleSimpleEmploeeController(email);
+        else if (status.equals("Supervisor"))
+            handleSupervisorController(email);
     }
 
-    private void handleStudentController(String email, String name, String password, double grade) {
-        StudentController studentController = new StudentController(email, name, password, grade);
+    private void handleStudentController(String email) {
+        StudentController studentController = new StudentController(dataReglamentator, email);
     }
 
-    private void handleMentorController(String email, String name, String password, double salary) {
-        MentorController mentorController = new MentorController(email, name, password, salary);
+    private void handleMentorController(String email) {
+        MentorController mentorController = new MentorController(dataReglamentator, email);
 
     }
-    private void handleSimpleEmploeeController(String email, String name, String password, double salary) {
-        SimpleEmployeeController simpleEmployeeController = new SimpleEmployeeController(email, name, password, salary);
+    private void handleSimpleEmploeeController(String email) {
+        SimpleEmployeeController simpleEmployeeController = new SimpleEmployeeController(dataReglamentator, email);
 
     }
-    private void handleSupervisorController(String email, String name, String password, double salary) {
-        SupervisorController supervisorController = new SupervisorController(email, name, password, salary);
+    private void handleSupervisorController(String email) {
+        SupervisorController supervisorController = new SupervisorController(dataReglamentator, email);
     }
 }
