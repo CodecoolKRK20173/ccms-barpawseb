@@ -19,15 +19,10 @@ public class MentorController {
 
     private static Scanner in = new Scanner(System.in);
 
-    public MentorController(String name, String email, String password, double salary){
-        mentor = new Mentor(name, email, password, salary);
+    public MentorController(DataReglamentator database, String email){
         view = new View();
-        try{
-            database = new DataReglamentator();
-        }
-        catch(IOException e){
-            e.printStackTrace();
-        }
+        this.database = database;
+        mentor = (Mentor) this.database.getEmployeeByEmail(email);
     }
     public void setPassword(){
         System.out.println("Your current password: " + mentor.getPassword());
@@ -48,20 +43,19 @@ public class MentorController {
         System.out.print("Enter student's name: ");
         String name = in.nextLine();
         System.out.print("Enter student's email: ");
-        String email = in.nextLine();
-        Student newStudent = new Student(name, email);
-        // not done yet waiting for DataReglamentator method
+        String email = in.nextLine();;
+        database.addStudent(name, email);
     }
     public void removeStudent(){
         System.out.print("Enter student's email You want to remove: ");
         String email = in.nextLine();
-        // not done yet waiting for DataReglamentator method
+        database.removeStudentByEmail(email);
     }
     public void showStudentsData(){
         System.out.print("Enter student's email for editing student's data: ");
         String email = in.nextLine();
-        // not done yet waiting for DataReglamentator method
-        //view.showUserData(user);
+        Student student = database.getStudentByEmail(email);
+        view.showStudentData(student);
     }
 
     
