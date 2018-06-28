@@ -10,6 +10,7 @@ src/users/User.java
 src/users/Supervisor.java
 src/users/Mentor.java
 src/users/Student.java
+src/LoginHandler.java
 src/view/View.java
-src/things/Assigment.java
-src/loginHandler.java
+src/Application.java
+src/things/Assignment.java

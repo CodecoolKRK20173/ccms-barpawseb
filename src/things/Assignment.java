@@ -14,7 +14,7 @@ public class Assignment {
         this.deadline = today.plusDays(14);
 	}
 	
-	public Assigment(String title, double maxPoints, String deadline){
+	public Assignment(String title, double maxPoints, String deadline){
 		this.title = title;
 		this.maxPoints = maxPoints;
 		this.deadline = LocalDate.parse(deadline); //use formatter;
