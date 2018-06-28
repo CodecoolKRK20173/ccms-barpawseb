@@ -1,14 +1,14 @@
-import controllers.StudentController;
-import database.DataManager;
-import java.io.IOException;
+import database.DataReglamentator;
+import users.User;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 class LoginHandler {
-    private DataManager dataManager;
-    private String[] loggedInUserDetails;
+    private DataReglamentator dataReglamentator;
+    private User loggedInUser;
 
-    LoginHandler() throws IOException {
-        dataManager = new DataManager();
+    LoginHandler(DataReglamentator dataReglamentator) {
+        this.dataReglamentator = dataReglamentator;
     }
 
     private static String getEmailFromUser() {
@@ -34,19 +34,18 @@ class LoginHandler {
     }
 
     private boolean isUserInDatabase(String email) {
-        for (String[] user : dataManager) {
-            String emailFromDatabase = user[0];
-            if (emailFromDatabase.equals(email)) {
-                loggedInUserDetails = user;
-                return true;
-            }
+        try {
+            loggedInUser = dataReglamentator.getUserByEmail(email);
         }
-        System.out.println("There is no such user. :(");
-        return false;
+        catch (NoSuchElementException e) {
+            System.out.println("There is no such user. :(");
+            return false;
+        }
+        return true;
     }
 
     private boolean isPasswordCorrect(String passFromUser) {
-        String passFromDatabase = loggedInUserDetails[3];
+        String passFromDatabase = loggedInUser.getPassword();
         if ((passFromUser.equals(passFromDatabase))) return true;
         else {
             System.out.println("Wrong password.");
@@ -54,7 +53,7 @@ class LoginHandler {
         }
     }
 
-    public String[] getloggedInUserDetails() {
-        return loggedInUserDetails;
+    User getLoggedInUser() {
+        return loggedInUser;
     }
 }
