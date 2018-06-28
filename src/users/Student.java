@@ -5,10 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import things.*;
 
 public class Student extends User{
-    private Map<String, Double> grades = new HashMap<>();
+    private Map<String, Double> grades = new HashMap<>(); //String: title
     private double gradesSum;
     private int absence;
 
@@ -28,9 +27,26 @@ public class Student extends User{
         return gradesSum;
     }
 
+    public Map<String,Double> getGrades() {
+        return grades;
+    }
+
+    public void setGrades(Map<String,Double> grades){
+        this.grades = grades;
+    }
+
+    public void addToGrades(String assignment, double points){
+        grades.putIfAbsent(assignment, points);
+    }
+
+    public void changeGrade(String assignment, double newPoints){
+        grades.put(assignment, newPoints);
+    }
+
+    /*
     public void addGradesSum(double points){
         gradesSum += points;
-    }
+    }*/
 
     public int getAbsence(){
         return absence;
@@ -45,7 +61,5 @@ public class Student extends User{
 
     }
 
-    public Map<String,Double> getGrades() {
-        return grades;
-    }
+    
 }
