@@ -2,6 +2,7 @@ package controllers;
 import users.*;
 import view.*;
 
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import database.*;
@@ -12,8 +13,8 @@ public class SupervisorController {
     private View view;
     private DataReglamentator database;
     private final String[] mamu = {"Add Mentor", "Remove Mentor",
-                                   "Edit Mentor's Data", "Show List of Mentors",
-                                   "Show List Of Students", "Change emploee's salary"};
+                                   "View Mentor's Data", "Show List of Mentors",
+                                   "Show List Of Students", "Change emploee's salary", "Exit"};
     
     private static Scanner in = new Scanner(System.in);
 
@@ -28,20 +29,30 @@ public class SupervisorController {
         System.out.print("Enter mentors's email: ");
         String email = in.nextLine();;
         database.addMentor(name, email);
+        database.updateDataManager();
     }
     public void removeMentor(){
         System.out.print("Enter mentor's email You want to remove: ");
         String email = in.nextLine();
-        database.removeEmployeeByEmail(email);
+        if (database.removeEmployeeByEmail(email))
+            System.out.println("Mentor has been removed.");
+        else
+            System.out.println("There's no such mentor.");
+        database.updateDataManager();
     }
     public void showMentorsData(){
-        System.out.print("Enter mentors's email for editing student's data: ");
+        System.out.print("Enter mentors's email for editing his/her data: ");
         String email = in.nextLine();
-        Employee employee = database.getEmployeeByEmail(email);
-        view.showEmploeeData(employee);
+        try {
+            Employee employee = database.getEmployeeByEmail(email);
+            view.showEmploeeData(employee);
+        }
+        catch (NoSuchElementException e) {
+            System.out.println("There is no such mentor.");
+        }
     }
     public void showMentors(){
-
+        view.showEmploeeList(database.extractMentorsList());
     }
     public void showStudents(){
         view.showStudentList(database.getStudentsList());
@@ -52,7 +63,17 @@ public class SupervisorController {
         System.out.print("Enter salary: ");
         double salary = Double.parseDouble(in.nextLine());
         database.getEmployeeByEmail(email).setSalary(salary);
+        database.updateDataManager();
     }
+
+    public void setPassword(){
+        System.out.println("Your current password: " + supervisor.getPassword());
+        System.out.print("Enter new password: ");
+        String newPassword = in.nextLine();
+        supervisor.setPassword(newPassword);
+        database.updateDataManager();
+    }
+
     public void showManu(){
         view.showManu(this.mamu);
     }

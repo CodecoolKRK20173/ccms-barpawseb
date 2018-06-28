@@ -11,7 +11,7 @@ public class SimpleEmployeeController {
     private View view;
     private DataReglamentator database;
     private final String[] mamu = {"Show List of Mentors",
-                                   "Show List Of Students"};
+                                   "Show List Of Students", "Change Password", "Exit"};
     
     private static Scanner in = new Scanner(System.in);
 
@@ -20,7 +20,24 @@ public class SimpleEmployeeController {
         this.database = database;
         employee = this.database.getEmployeeByEmail(email);
     }
+    public void showManu(){
+        view.showManu(this.mamu);
+    }
+
+    public void setPassword(){
+        System.out.println("Your current password: " + employee.getPassword());
+        System.out.print("Enter new password: ");
+        String newPassword = in.nextLine();
+        employee.setPassword(newPassword);
+        database.updateDataManager();
+    }
+
     public void showStudents(){
         view.showStudentList(database.getStudentsList());
     }
+
+    public void showMentors(){
+        view.showEmploeeList(database.extractMentorsList());
+    }
+
 }

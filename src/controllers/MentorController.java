@@ -1,6 +1,5 @@
 package controllers;
 import java.util.Scanner;
-import java.io.IOException;
 import java.util.List;
 import database.*;
 import users.*;
@@ -12,10 +11,10 @@ public class MentorController {
     private View view;
     private DataReglamentator database;
     private final String[] namu = {"Show all Students", "Add Student",
-                                   "Remove Student", "Edit Student's Data", 
+                                   "Remove Student", "View Student's Data",
                                    "Check Attendance Of Students",
                                    "Add Assignment", "Grade Assignments",
-                                   "Change Password"};
+                                   "Change Password", "Exit"};
 
     private static Scanner in = new Scanner(System.in);
 
@@ -29,6 +28,7 @@ public class MentorController {
         System.out.print("Enter new password: ");
         String newPassword = in.nextLine();
         mentor.setPassword(newPassword);
+        database.updateDataManager();
     }
     public List<Student> getStudentsList(){
         return database.getStudentsList();
@@ -45,11 +45,16 @@ public class MentorController {
         System.out.print("Enter student's email: ");
         String email = in.nextLine();;
         database.addStudent(name, email);
+        database.updateDataManager();
     }
     public void removeStudent(){
         System.out.print("Enter student's email You want to remove: ");
         String email = in.nextLine();
-        database.removeStudentByEmail(email);
+        if (database.removeStudentByEmail(email))
+            System.out.println("Student has been removed.");
+        else
+            System.out.println("There's no such student.");
+        database.updateDataManager();
     }
     public void showStudentsData(){
         System.out.print("Enter student's email for editing student's data: ");
@@ -58,6 +63,17 @@ public class MentorController {
         view.showStudentData(student);
     }
 
-    
+    public void checkAttendence() {
+        List<Student> studentsList = getStudentsList();
+        for (Student student : studentsList) {
+            view.showStudentData(student);
+            System.out.print("Is this student present? (Y/N): ");
+            if (in.nextLine().toLowerCase().equals("n"))
+                student.incrementAbsence();
+        }
+        database.updateDataManager();
+    }
+
+
 
 }

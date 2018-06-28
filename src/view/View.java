@@ -8,7 +8,7 @@ public class View {
 
     public void showManu(String [] manu){
         for(int i = 0; i < manu.length; i++){
-            System.out.println("" + i+1 + ". " + manu[i]);
+            System.out.println("" + (i+1) + ". " + manu[i]);
         }
     }
     public void showEmploeeData(Employee employee){
@@ -19,7 +19,12 @@ public class View {
     }
     public void showStudentList(List<Student> list){
         for(int i = 0; i < list.size(); i++){
-            System.out.println("" + i+1 + ". " + list.get(i).toString());
+            System.out.println("" + (i+1) + ". " + list.get(i).toString());
+        }
+    }
+    public void showEmploeeList(List<Employee> list){
+        for(int i = 0; i < list.size(); i++){
+            System.out.println("" + (i+1) + ". " + list.get(i).toString());
         }
     }
     public void showGrades(Map<String, Double> map){

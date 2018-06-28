@@ -17,7 +17,7 @@ public class DataReglamentator{
     List <User> allUsers = new ArrayList<>();
 
     public DataReglamentator() throws IOException{
-        dataManager = new DataManager();
+        dataManager = new DataManager("src/database/users.csv");
         createListsOfAllTypeOfUser();
         updateAllUssersList();
     }
@@ -41,6 +41,8 @@ public class DataReglamentator{
                 supervisors.add(new Supervisor(name, email, password));
             else if(status.equals("Student"))
                 students.add(new Student(name, email, password, Integer.parseInt(absence)));
+            else if (status.equals("Mentor"))
+                employees.add(new Mentor(name, email, password, Double.parseDouble(salary)));
             else employees.add(new Employee(name, email, password, Double.parseDouble(salary)));
         }
     }
@@ -117,9 +119,13 @@ public class DataReglamentator{
         updateAllUssersList();
     }
 
-    public void removeStudentByEmail(String email ){
-        students.removeIf(s -> s.getEmail().equals(email));
-        updateAllUssersList();
+    public boolean removeStudentByEmail(String email ){
+        if (students.removeIf(s -> s.getEmail().equals(email))) {
+            updateAllUssersList();
+            return true;
+        }
+        else
+            return false;
     }
 
     public void removeStudent(Student student){
@@ -138,9 +144,13 @@ public class DataReglamentator{
         updateAllUssersList();
     }
 
-    public void removeEmployeeByEmail(String email){
-        employees.removeIf(emp -> emp.getEmail().equals(email));
-        updateAllUssersList();
+    public boolean removeEmployeeByEmail(String email){
+        if (employees.removeIf(emp -> emp.getEmail().equals(email))) {
+            updateAllUssersList();
+            return true;
+        }
+        else
+            return false;
     }
     
     public void removeEmployee(Employee employee){
