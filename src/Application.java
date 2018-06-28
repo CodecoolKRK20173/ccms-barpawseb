@@ -48,7 +48,7 @@ class Application {
         while(isRunning) {
             studentController.showManu();
             System.out.print("What's your choice? ");
-            int option = this.getChoice(1, 5, true);
+            int option = Application.getChoice(1, 5, true);
             if (option == 1) {
 
             }
@@ -73,7 +73,7 @@ class Application {
         while(isRunning) {
             mentorController.showManu();
             System.out.print("What's your choice? ");
-            int option = this.getChoice(1, 9, true);
+            int option = Application.getChoice(1, 9, true);
             if (option == 1) {
                 mentorController.showStudents();
             }
@@ -93,7 +93,7 @@ class Application {
 
             }
             else if (option == 7) {
-
+                mentorController.gradeStudent();
             }
             else if (option == 8) {
                 mentorController.setPassword();
@@ -110,7 +110,7 @@ class Application {
         while(isRunning) {
             simpleEmployeeController.showManu();
             System.out.print("What's your choice? ");
-            int option = this.getChoice(1, 4, true);
+            int option = Application.getChoice(1, 4, true);
             if (option == 1) {
                 simpleEmployeeController.showMentors();
             }
@@ -132,7 +132,7 @@ class Application {
         while(isRunning) {
             supervisorController.showManu();
             System.out.print("What's your choice? ");
-            int option = this.getChoice(1, 7, true);
+            int option = Application.getChoice(1, 7, true);
             if (option == 1) {
                 supervisorController.addMentor();
             }

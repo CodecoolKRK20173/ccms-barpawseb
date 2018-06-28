@@ -73,6 +73,19 @@ public class MentorController {
         }
         database.updateDataManager();
     }
+    public void gradeStudent(){
+        System.out.print("Enter student's email You want to grade: ");
+        String email = in.nextLine();
+        Student student = database.getStudentByEmail(email);
+        view.showStudentData(student);
+        view.showGrades(database.getStudentByEmail(email).getGrades());
+        System.out.print("Choose assignment You want to grade: ");
+        String assignment = in.nextLine();
+        System.out.println("Enter Your grade value: ");
+        double grade = Double.parseDouble(in.nextLine());
+        student.getGrades().put(assignment, grade);
+        database.updateDataManager();
+    }
 
 
 
