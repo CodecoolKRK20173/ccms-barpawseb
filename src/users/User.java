@@ -38,7 +38,7 @@ public abstract class User{
         return password;
     }
 
-    public String getStatus(){
+    public  String getStatus(){
         return getClass().getSimpleName();
     }
     

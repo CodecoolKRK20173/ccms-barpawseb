@@ -44,4 +44,8 @@ public class Student extends User{
         return String.format("\n%s \t\tAbsence: %d",super.toString(), absence);
 
     }
+
+    public Map<String,Double> getGrades() {
+        return grades;
+    }
 }

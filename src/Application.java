@@ -28,6 +28,7 @@ class Application {
     private void chooseController() {
         String email = loggedInUser.getEmail();
         String status = loggedInUser.getStatus();
+        System.out.println(status);
 
         if (status.equals("Student"))
             handleStudentController(email);
@@ -45,6 +46,10 @@ class Application {
 
     private void handleMentorController(String email) {
         MentorController mentorController = new MentorController(dataReglamentator, email);
+        boolean isRunning = true;
+        while(isRunning) {
+            mentorController.showManu();
+        }
 
     }
     private void handleSimpleEmploeeController(String email) {

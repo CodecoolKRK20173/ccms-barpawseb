@@ -8,7 +8,7 @@ import database.*;
 
 public class SupervisorController {
 
-    private Supervisor supervisor;
+    private User supervisor;
     private View view;
     private DataReglamentator database;
     private final String[] mamu = {"Add Mentor", "Remove Mentor",
