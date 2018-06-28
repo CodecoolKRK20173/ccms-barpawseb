@@ -1,13 +1,11 @@
 package users;
 
 import java.util.HashMap;
-
 import java.util.Map;
 
-import things.*;
 
 public class Student extends User{
-    private Map<String, Double> grades = new HashMap<>();
+    private Map<String, Double> grades = new HashMap<>(); //String: title
     private double gradesSum;
     private int absence;
 
@@ -27,8 +25,20 @@ public class Student extends User{
         return gradesSum;
     }
 
-    public void addGradesSum(double points){
-        gradesSum += points;
+    public Map<String,Double> getGrades() {
+        return grades;
+    }
+
+    public void setGrades(Map<String,Double> grades){
+        this.grades = grades;
+    }
+
+    public void addToGrades(String assignment, double points){
+        grades.putIfAbsent(assignment, points);
+    }
+
+    public void changeGrade(String assignment, double newPoints){
+        grades.put(assignment, newPoints);
     }
 
     public int getAbsence(){
@@ -42,9 +52,5 @@ public class Student extends User{
     public String toString(){
         return String.format("\n%s \t\tAbsence: %d",super.toString(), absence);
 
-    }
-
-    public Map<String,Double> getGrades() {
-        return grades;
     }
 }

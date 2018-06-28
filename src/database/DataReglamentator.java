@@ -1,7 +1,9 @@
 package database;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Arrays;
@@ -11,13 +13,15 @@ import users.*;
 
 public class DataReglamentator{
     DataManager dataManager;
+    DataManager usersAssignmentDataManager;
     List<Supervisor> supervisors = new ArrayList<>();
     List<Student> students =  new ArrayList<>();
     List<Employee> employees = new ArrayList<>();
     List <User> allUsers = new ArrayList<>();
 
-    public DataReglamentator() throws IOException{
-        dataManager = new DataManager("src/database/users.csv");
+    public DataReglamentator(String filePath, String filePath2) throws IOException{
+        dataManager = new DataManager(filePath);
+        usersAssignmentDataManager = new DataManager(filePath2);
         createListsOfAllTypeOfUser();
         updateAllUssersList();
     }
@@ -45,6 +49,26 @@ public class DataReglamentator{
                 employees.add(new Mentor(name, email, password, Double.parseDouble(salary)));
             else employees.add(new Employee(name, email, password, Double.parseDouble(salary)));
         }
+        createGrades();
+    }
+
+    private void createGrades(){
+        for(String[]line: usersAssignmentDataManager){
+            String studentEmail = line[0];
+            Map<String, Double> studentGrades = createAssigmentsMap(line);
+            getStudentByEmail(studentEmail).setGrades(studentGrades);
+        }
+    }
+
+    private Map<String, Double> createAssigmentsMap(String[]line){
+        Map<String, Double> studentGrades = new HashMap<>();
+        for(int i=1; i<line.length-1; i+=2){
+            String assignment = line[i];
+            double points = Double.parseDouble(line[i+1]);
+            studentGrades.put(assignment,points);
+        }
+        return studentGrades;
+
     }
     
     public Collection<User> getUsersList(){
@@ -193,12 +217,13 @@ public class DataReglamentator{
     }
 
     public static void main(String[] args)throws IOException {
-        User mentor = new Mentor ("name", "email");
-        System.out.println(mentor.getStatus());
-        DataReglamentator test = new DataReglamentator();
-        User kto = test.getUserByEmail("jozek@lala.com");
-        System.out.println(kto);
-        System.out.println(kto.getStatus());
+
+        DataReglamentator test = new DataReglamentator("src/data/users.csv","src/data/assignments.csv");
+        for (Student stu : test.students) {
+            stu.getGrades().forEach((k,v) -> System.out.println("key: "+k+" value:"+v));
+            
+        }
+        
         //test.updateDataManager();
        /*
         System.out.println(test.getStudentsList());

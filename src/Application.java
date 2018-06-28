@@ -15,7 +15,7 @@ class Application {
 
     Application() {
         try {
-            dataReglamentator = new DataReglamentator();
+            dataReglamentator = new DataReglamentator("src/data/users.csv","src/data/assignments.csv");
             LoginHandler loginHandler = new LoginHandler(dataReglamentator);
             if (loginHandler.isLoggedIn()) {
                 loggedInUser = loginHandler.getLoggedInUser();
