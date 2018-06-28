@@ -9,7 +9,7 @@ import java.util.ArrayList;
         super(name, email);
     }
     
-    protected Supervisor (String name, String email, String password){
+    public Supervisor (String name, String email, String password){
         super(name, email, password);
     }
 
