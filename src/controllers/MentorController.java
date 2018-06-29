@@ -106,4 +106,15 @@ public class MentorController {
         student.getGrades().put(assignment, grade);
         dataReglamentator.updateDataManager();
     }
+
+    public void addAssignment() {
+        System.out.print("Enter assignment you want to add: ");
+        String assignment = in.nextLine();
+        double initialGrade = 0.0;
+        List<Student> studentsList = dataReglamentator.getStudentsList();
+        for (Student student : studentsList) {
+            student.getGrades().put(assignment, initialGrade);
+        }
+        dataReglamentator.updateDataManager();
+    }
 }

@@ -24,9 +24,12 @@ class LoginHandler {
     }
 
     boolean isLoggedIn() {
+        boolean isloginInfoWrong = true;
+        while (isloginInfoWrong)
         if (isUserInDatabase(getEmailFromUser())) {
             if (isPasswordCorrect(getPasswordFromUser())) {
                 System.out.println("Good! Yo're in.");
+                isloginInfoWrong = false;
                 return true;
             }
         }

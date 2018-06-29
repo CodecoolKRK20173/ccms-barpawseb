@@ -86,7 +86,7 @@ class Application {
                 mentorController.checkAttendence();
             }
             else if (option == 6) {
-
+                mentorController.addAssignment();
             }
             else if (option == 7) {
                 mentorController.gradeStudent();
