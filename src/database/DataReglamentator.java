@@ -13,16 +13,16 @@ import java.io.IOException;
 import users.*;
 
 public class DataReglamentator{
-    DataManager dataManager;
-    DataManager usersAssignmentDataManager;
+    DataManager usersDataProvider;
+    DataManager usersAssignmentDataProvider;
     List<Supervisor> supervisors = new ArrayList<>();
     List<Student> students =  new ArrayList<>();
     List<Employee> employees = new ArrayList<>();
     List <User> allUsers = new ArrayList<>();
 
     public DataReglamentator(String filePath, String filePath2) throws IOException{
-        dataManager = new DataManager(filePath);
-        usersAssignmentDataManager = new DataManager(filePath2);
+        usersDataProvider = new DataManager(filePath);
+        usersAssignmentDataProvider = new DataManager(filePath2);
         createListsOfAllTypeOfUser();
         updateAllUssersList();
     }
@@ -35,7 +35,7 @@ public class DataReglamentator{
     }
 
     private void createListsOfAllTypeOfUser(){
-        for(String[] line: dataManager){
+        for(String[] line: usersDataProvider){
             String email = line[0];
             String name = line[1];
             String password = line[2];
@@ -54,7 +54,7 @@ public class DataReglamentator{
     }
 
     private void createGrades(){
-        for(String[]line: usersAssignmentDataManager){
+        for(String[]line: usersAssignmentDataProvider){
             //* for array of String lines takes index 0 of each line as String paramether by wich
             /*takes a Student element of List<Student>  and using createAssigmentsMap(String[]) sets
             /*its pool;
@@ -194,9 +194,9 @@ public class DataReglamentator{
    
     public void updateDataManager(){
         List <String[]> lines = transformUsersListToExportLines();
-        dataManager.setUsersLines(lines);
+        usersDataProvider.setUsersLines(lines);
         List<String[]> assignmentsLines = transformAssignmentsMapToExportLines();
-        usersAssignmentDataManager.setUsersLines(assignmentsLines);
+        usersAssignmentDataProvider.setUsersLines(assignmentsLines);
     }
 
     private List<String[]> transformUsersListToExportLines(){
