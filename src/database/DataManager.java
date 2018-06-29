@@ -13,7 +13,7 @@ public class DataManager implements Iterable<String[]> {
     private List<String[]> dataLines = new ArrayList<>();
     private final String filePath;
 
-    public DataManager(String filePath) throws IOException {
+    DataManager(String filePath) throws IOException {
         this.filePath = filePath;
         loadDataList(filePath);
     }

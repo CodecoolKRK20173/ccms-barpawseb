@@ -1,3 +1,5 @@
+package application;
+
 import database.DataReglamentator;
 import users.User;
 import java.util.NoSuchElementException;

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Employee extends User{
-    double salary;
+    private double salary;
 
     public Employee(String name, String email){
         super(name, email);

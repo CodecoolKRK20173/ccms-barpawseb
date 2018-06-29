@@ -1,3 +1,5 @@
+package application;
+
 import controllers.MentorController;
 import controllers.SimpleEmployeeController;
 import controllers.StudentController;
@@ -9,11 +11,11 @@ import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-class Application {
+public class Application {
     private User loggedInUser;
-    public DataReglamentator dataReglamentator;
+    private DataReglamentator dataReglamentator;
 
-    Application(String filePath, String filePath2) throws IOException {
+    public Application(String filePath, String filePath2) throws IOException {
         
         dataReglamentator = new DataReglamentator(filePath, filePath2);
         LoginHandler loginHandler = new LoginHandler(dataReglamentator);
