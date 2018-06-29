@@ -13,17 +13,13 @@ class Application {
     private User loggedInUser;
     public DataReglamentator dataReglamentator;
 
-    Application() {
-        try {
-            dataReglamentator = new DataReglamentator("src/data/users.csv","src/data/assignments.csv");
-            LoginHandler loginHandler = new LoginHandler(dataReglamentator);
-            if (loginHandler.isLoggedIn()) {
-                loggedInUser = loginHandler.getLoggedInUser();
-                chooseController();
-            }
-        }
-        catch(IOException e){
-            e.printStackTrace();
+    Application(String filePath, String filePath2) throws IOException {
+        
+        dataReglamentator = new DataReglamentator(filePath, filePath2);
+        LoginHandler loginHandler = new LoginHandler(dataReglamentator);
+        if (loginHandler.isLoggedIn()) {
+            loggedInUser = loginHandler.getLoggedInUser();
+            chooseController();
         }
     }
 
