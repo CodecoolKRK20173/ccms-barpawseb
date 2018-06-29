@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
+
 import java.util.Arrays;
 
 import java.io.IOException;
@@ -54,13 +55,21 @@ public class DataReglamentator{
 
     private void createGrades(){
         for(String[]line: usersAssignmentDataManager){
+            //* for array of String lines takes index 0 of each line as String paramether by wich
+            /*takes a Student element of List<Student>  and using createAssigmentsMap(String[]) sets
+            /*its pool;
+            */ 
             String studentEmail = line[0];
-            Map<String, Double> studentGrades = createAssigmentsMap(line);
+            Map<String, Double> studentGrades = createMapFromStringArray(line);
             getStudentByEmail(studentEmail).setGrades(studentGrades);
         }
     }
 
-    private Map<String, Double> createAssigmentsMap(String[]line){
+    private static Map<String, Double> createMapFromStringArray(String[]line){
+        //*for String line as: [email,assignment name,points,assignments name,points...]
+        /* creates a Map as following: < String assignmantName, Double points >
+        */
+
         Map<String, Double> studentGrades = new HashMap<>();
         for(int i=1; i<line.length-1; i+=2){
             String assignment = line[i];
@@ -186,8 +195,8 @@ public class DataReglamentator{
     public void updateDataManager(){
         List <String[]> lines = transformUsersListToExportLines();
         dataManager.setUsersLines(lines);
-        //for(String[] line:lines)
-          //  System.out.println(Arrays.toString(line));
+        List<String[]> assignmentsLines = transformAssignmentsMapToExportLines();
+        usersAssignmentDataManager.setUsersLines(assignmentsLines);
     }
 
     private List<String[]> transformUsersListToExportLines(){
@@ -216,25 +225,23 @@ public class DataReglamentator{
         return usersLines;        
     }
 
-    public static void main(String[] args)throws IOException {
-
-        DataReglamentator test = new DataReglamentator("src/data/users.csv","src/data/assignments.csv");
-        for (Student stu : test.students) {
-            stu.getGrades().forEach((k,v) -> System.out.println("key: "+k+" value:"+v));
-            
+    private List<String[]> transformAssignmentsMapToExportLines(){
+        List<String[]> assignmentsLines = new ArrayList<>();
+        for (Student student : students) {
+            String email = student.getEmail();
+            Map<String, Double> assignmentMap = student.getGrades();
+            List <String> listedAssignment = mapToStringList(assignmentMap);
+            listedAssignment.add (0,email);
+            assignmentsLines.add(listedAssignment.toArray(new String[listedAssignment.size()]));
         }
-        
-        //test.updateDataManager();
-       /*
-        System.out.println(test.getStudentsList());
-        System.out.println(test.getEmployeesList());
-        System.out.println(test.getUsersList());
-        System.out.println(" \n* * * \n");
+        return assignmentsLines;
 
-        test.addStudent("piotr", "email");
-        System.out.println(test.getStudentsList());
-        System.out.println(" \n* * * \n");*/
-        //System.out.println(test.getUsersList());
+    }
+
+    private static List <String> mapToStringList(Map<String, Double> assignmentMap){
+        List<String> list = new ArrayList<>();
+        assignmentMap.forEach((k,v)-> {list.add(k); list.add(String.valueOf(v));});
+        return list;   
     }
 }
 
