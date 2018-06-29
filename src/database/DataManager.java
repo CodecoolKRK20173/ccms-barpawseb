@@ -26,7 +26,7 @@ public class DataManager implements Iterable<String[]> {
         }
     }
 
-    public void saveListToDatabase(List<String[]> dataList) {
+    private void saveListToDatabase(List<String[]> dataList) {
         boolean firstLine = true;
         StringBuilder sb = new StringBuilder();
         for (String[] line : dataList) {
@@ -51,7 +51,7 @@ public class DataManager implements Iterable<String[]> {
         return dataLines.iterator();
     }
 
-    public void setUsersLines(List<String[]> lines){ //overwrites list with content to be written to data base;
+    void setUsersLines(List<String[]> lines) { //overwrites list with content to be written to data base;
         dataLines = lines;
         saveListToDatabase(dataLines);
     }

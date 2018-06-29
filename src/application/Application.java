@@ -6,7 +6,6 @@ import controllers.StudentController;
 import controllers.SupervisorController;
 import database.DataReglamentator;
 import users.User;
-
 import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -16,7 +15,6 @@ public class Application {
     private DataReglamentator dataReglamentator;
 
     public Application(String filePath, String filePath2) throws IOException {
-        
         dataReglamentator = new DataReglamentator(filePath, filePath2);
         LoginHandler loginHandler = new LoginHandler(dataReglamentator);
         if (loginHandler.isLoggedIn()) {
@@ -100,8 +98,8 @@ public class Application {
                 isRunning = false;
             }
         }
-
     }
+
     private void handleSimpleEmploeeController(String email) {
         SimpleEmployeeController simpleEmployeeController = new SimpleEmployeeController(dataReglamentator, email);
         boolean isRunning = true;
@@ -122,8 +120,8 @@ public class Application {
                 isRunning = false;
             }
         }
-
     }
+
     private void handleSupervisorController(String email) {
         SupervisorController supervisorController = new SupervisorController(dataReglamentator, email);
         boolean isRunning = true;

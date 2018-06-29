@@ -13,12 +13,12 @@ import java.io.IOException;
 import users.*;
 
 public class DataReglamentator{
-    DataManager usersDataProvider;
-    DataManager usersAssignmentDataProvider;
-    List<Supervisor> supervisors = new ArrayList<>();
-    List<Student> students =  new ArrayList<>();
-    List<Employee> employees = new ArrayList<>();
-    List <User> allUsers = new ArrayList<>();
+    private DataManager usersDataProvider;
+    private DataManager usersAssignmentDataProvider;
+    private List<Supervisor> supervisors = new ArrayList<>();
+    private List<Student> students =  new ArrayList<>();
+    private List<Employee> employees = new ArrayList<>();
+    private List <User> allUsers = new ArrayList<>();
 
     public DataReglamentator(String filePath, String filePath2) throws IOException{
         usersDataProvider = new DataManager(filePath);
@@ -101,8 +101,6 @@ public class DataReglamentator{
         return mentorsPicked;
     }
 
- 
-    //usefull only during login
     public User getUserByName(String name)throws NoSuchElementException{
         for( User user: allUsers){
             if (user.getName().equals(name)) return user;
@@ -110,7 +108,6 @@ public class DataReglamentator{
         throw new NoSuchElementException();
     }
 
-    //usefull only during login
     public User getUserByEmail(String email) throws NoSuchElementException{
         for (User user: allUsers){
             if (user.getEmail().equals(email)) return user;
@@ -190,7 +187,6 @@ public class DataReglamentator{
         employees.remove(employee);
         updateAllUssersList();
     }
-
    
     public void updateDataManager(){
         List <String[]> lines = transformUsersListToExportLines();
@@ -235,7 +231,6 @@ public class DataReglamentator{
             assignmentsLines.add(listedAssignment.toArray(new String[listedAssignment.size()]));
         }
         return assignmentsLines;
-
     }
 
     private static List <String> mapToStringList(Map<String, Double> assignmentMap){
