@@ -18,3 +18,4 @@ ccms-barpawseb created by Bartek-Paweł-Sebastian
 4. To run `<name>` class you have run `java` command with the path to all compiled files and specified name of class including the name of the package it belongs to:
 
     `java -cp out/production/ <pack>.<pack>.<className>`
+    `java -cp out/production/ Main`
